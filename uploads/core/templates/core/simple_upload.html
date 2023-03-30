@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  {% endif %}
+
+  {% if uploaded_file_url %}
+    <h2>Uploaded File</h2>
+    <pre>{{ file_content }}</pre>
+  {% endif %}
+
+  <div id="heatmap-container">
+    {% if heatmap_html %}
+        {{ heatmap_html|safe }}
+    {% endif %}
+  </div>
+
+  <div id="heatmap-container">
+    {% if plot_pca %}
+        {{ plot_pca|safe }}
+    {% endif %}
+  </div>
+  
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}

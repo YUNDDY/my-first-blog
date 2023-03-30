@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <ul>
+    <li>
+      <a href="{% url 'data_filter' %}">Data filter</a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a href="{% url 'simple_upload' %}">Heatmap</a>
+    </li>
+    <li>
+      <a href="{% url 'venn' %}">Venn Diagram</a>
+    </li>
+    <li>
+      <a href="{% url 'PCA' %}">PCA</a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a href="{% url 'simple_upload' %}">Document Download</a>
+    </li>
+  </ul>
+
+  <ul>
+    {% for obj in documents %}
+      <li>
+        <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
+        <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

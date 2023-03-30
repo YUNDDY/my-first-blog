@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  {% endif %}
+
+  {% if uploaded_file_url %}
+    <h2>Uploaded Data(10 line)</h2>
+    <pre>{{ file_content }}</pre>
+  {% endif %}
+
+  {% if uploaded_file_url %}
+  <h2>Filtered Data(10 line)</h2>
+  <pre>{{ filtered_df }}</pre>
+  {% if download_link %}
+    <a href="/uploads/download/?file={{ download_link }}">Download Filtered Data</a>
+  {% endif %}
+{% endif %}
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}
